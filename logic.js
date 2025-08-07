@@ -14,8 +14,8 @@ let d=true;
 
 set();
 function set(){
+let fixedName1 = document.getElementById('name').value.toLowerCase();
 
-    let fixedName1=document.getElementById('name').value;
     let image;
     if(fixedName1=="salfet sigdel"){
         image="https://i.ibb.co/svDnSDJY/salfet.png";
