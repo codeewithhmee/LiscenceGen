@@ -29,13 +29,31 @@ function set(){
         image="https://static.vecteezy.com/system/resources/thumbnails/005/346/410/small_2x/close-up-portrait-of-smiling-handsome-young-caucasian-man-face-looking-at-camera-on-isolated-light-gray-studio-background-photo.jpg";
         d=false;
     }
-    console.log(fixedName1.toLowerCase());
+    insertImage(image);
+async function insertImage(url) {
+  const base64 = await loadImageAsBase64(url);
+  const img = document.getElementById('pp');
+  img.src = base64;
+}
+async function loadImageAsBase64(url) {
+  const response = await fetch(url, { mode: "cors" });
+  const blob = await response.blob();
+
+  return await new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result); 
+    reader.readAsDataURL(blob);
+  });
+}
+
+
+
     document.getElementById('name_').innerText="Name: "+document.getElementById('name').value;
     document.getElementById('address_').innerText="Address: "+document.getElementById('address').value;
     document.getElementById('dob_').innerText="DOB: "+document.getElementById('dob').value;
     document.getElementById('fhname_').innerText="F/H Name: "+document.getElementById('fhname').value;
     document.getElementById('name_').innerText="Name: "+document.getElementById('name').value;
-    document.getElementById('pp').src=image;
+    // document.getElementById('pp').src=image;
     document.getElementById('doi_').innerText="D.O.I.:"+document.getElementById('doi').value;
     document.getElementById('doe_').innerText="D.O.E.:"+document.getElementById('doe').value;
     document.getElementById('pn_').innerText="Passport:"+document.getElementById('pn').value;
@@ -45,16 +63,13 @@ function set(){
     document.getElementById('phone_').innerText="Phone:"+document.getElementById('phone').value;
     document.getElementById('dl_').innerText="D.l.:"+document.getElementById('dl').value;
 }
-function downloadDivAsImage() {
-    const element = document.getElementById("capture");
-
-    html2canvas(element).then(canvas => {
-      const imageData = canvas.toDataURL("image/png");
-      
-     
-      const link = document.createElement("a");
-      link.href = imageData;
-      link.download = "div-image.png";
-      link.click();
-    });
-  }
+function downloadDiv() {
+  html2canvas(document.getElementById("capture"), {
+    useCORS: true
+  }).then(canvas => {
+    const link = document.createElement("a");
+    link.download = "license.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+  });
+}
