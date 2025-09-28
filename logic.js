@@ -1,12 +1,12 @@
 function togg(e){
-    if(e.innerText=='Data'){
+    if(e.innerText=='Open'){
         var t=document.querySelector('.data');
         t.style.display="flex";
         e.innerText='Close';
     }else{
          var t=document.querySelector('.data');
         t.style.display="none";
-        e.innerText='Data';
+        e.innerText='Open';
     }
     
 }
@@ -73,3 +73,4 @@ function downloadDiv() {
     link.click();
   });
 }
+
